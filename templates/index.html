@@ -53,9 +53,8 @@
             <label>Prediccion</label>
             <input type="text" class="form-control" placeholder="Ingrese el ultimo digito de la placa" name="prediccion">
         </div>
-
         <br>
-        <div class="d-grid gap-2 col-6 mx-auto">
+        <div class="d-grid gap-2 col-3">
             <input type="submit" value="Registrar" class="btn btn-dark">
         </div>
     </form><br>
@@ -100,15 +99,15 @@
 
     <!--Funcion controlador para guardar registros en archivo *.pickle-->
     <form action="{{url_for('guardar')}}" method="post" class="card-body">
-        <div class="d-grid gap-2 col-6 mx-auto">
-            <button type="submit" class="btn btn-success">Guardar Registros</button>
+        <div class="d-grid gap-2 col-3">
+            <button type="submit" class="btn btn-primary">Guardar Registros</button>
         </div>
     </form>
 
     <!--Funcion controlador para borrar registros-->
     <form action="{{url_for('borrar')}}" method="post" class="card-body">
-        <div class="d-grid gap-2 col-6 mx-auto">
-            <button type="submit" class="btn btn-danger mb-2">Borrar registros</button>
+        <div class="d-grid gap-2 col-3">
+            <button type="submit" class="btn btn-dark mb-2">Borrar registros</button>
         </div>
     </form>
 

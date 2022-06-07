@@ -46,7 +46,6 @@ def enviar():
         prediccion = request.form['prediccion']
 
 
-
         # Funcion condicional para no registrar en caso de datos vacios
         if nroLlamada == '' or placaVehiculo == '' or fecha == '' or hora == '' or prediccion == '':
             #Mensaje de alerta de campos faltantes
@@ -105,8 +104,6 @@ def guardar():
                 return redirect(url_for('home'))
             else:
                 return redirect(url_for('home'))
-
-#llamar a holidays
 
 #Holidays para ecuador
 class HolidayEcuador(HolidayBase):
@@ -255,6 +252,7 @@ class HolidayEcuador(HolidayBase):
                 self[datetime.date(year, DEC, 6) + rd(weekday=FR)] = name
             else:
                 self[datetime.date(year, DEC, 6)] = name
+
 
 
 # Metodo main del programa

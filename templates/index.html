@@ -12,14 +12,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
         crossorigin="anonymous"></script>
-    <title>Lista de tareas</title>
+    <title>Llamadas</title>
 
     <style type="text/css">
         /*Estilos CSS propios*/
-        body {
-            background: url("https://wallpx.com/image/2021/05/minimalism-paper-airplane.jpg");
-        }
-
         footer {
             position: absolute;
             bottom: 0;
@@ -28,21 +24,14 @@
             color: white;
         }
 
-        h1 {
-            text-align: center;
-            color: white;
-        }
 
-        label {
-            color: white;
-        }
     </style>
 
 
 </head>
 
 <body>
-    <h1>Formulario de Registro</h1>
+    <h1>Registro de llamadas</h1>
 
     <!--Formulario para el ingreso de nuevas tareas tomado de Bootstrap-->
     <form method="post" action="{{url_for('enviar')}}">
@@ -72,7 +61,7 @@
         </div>
     </form><br>
 
-    <h1>Lista de Tareas</h1>
+    <h1>Listado de Llamadas</h1>
 
     <!--Controlador 1.1 Tabla para mostrar las tareas-->
     <table class="table table-dark table-striped">

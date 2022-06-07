@@ -17,7 +17,7 @@ listaLlamadas = []
 def home():
     return render_template('index.html', listaLlamadas=listaLlamadas)
 
-# 2. Funcion controlador para agregar lista a tarea de pendientes
+# 2. Funcion controlador para agregar llamada a lista de llamadas
 # Definicion de la ruta
 @app.route('/enviar', methods=['POST'])
 # Llamar a enviar

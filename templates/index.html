@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+    <title>Lista de tareas</title>
+
+    <style type="text/css">
+        /*Estilos CSS propios*/
+        body {
+            background: url("https://wallpx.com/image/2021/05/minimalism-paper-airplane.jpg");
+        }
+
+        footer {
+            position: absolute;
+            bottom: 0;
+            font-family: titulares;
+            font-size: 13px;
+            color: white;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+        }
+
+        label {
+            color: white;
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <h1>Formulario de Registro</h1>
+
+    <!--Formulario para el ingreso de nuevas tareas tomado de Bootstrap-->
+    <form method="post" action="{{url_for('enviar')}}">
+        <div class="form-group">
+            <label>Tarea</label>
+            <input type="text" class="form-control" placeholder="Ingrese la descripción de la tarea" name="descripcion">
+        </div>
+        <div class="form-group">
+            <label>Correo electrónico</label>
+            <input type="email" class="form-control"
+                placeholder="Ingrese el correo electrónico del responsable de la tarea" name="correoElec"
+                aria-describedby="emailHelp">
+        </div>
+        <div class="form-group">
+            <label>Prioridad</label>
+            <select class="form-select" size="1" aria-label="size 3 name select example" name ="prioridad">
+                <option value=""></option>
+                <option value="Baja">Baja</option>
+                <option value="Media">Media</option>
+                <option value="Alta">Alta</option>
+            </select>
+
+        </div> 
+        <br>
+        <div class="d-grid gap-2 col-6 mx-auto">
+            <input type="submit" value="Registrar" class="btn btn-primary">
+        </div>
+    </form><br>
+
+    <h1>Lista de Tareas</h1>
+
+    <!--Controlador 1.1 Tabla para mostrar las tareas-->
+    <table class="table table-dark table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Descripción de la tarea</th>
+                <th scope="col">Correo electrónico</th>
+                <th scope="col">Prioridad</th>
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <tr>
+                {% for tarea in listaTareas %}
+                <!--Mostrar la descripción de la tarea-->
+                <th>{{tarea.descripcion}}
+                    <button type="submit" class="btn btn-outline-warning">Borrar Registro</button>
+                </th>
+                <!--Mostrar correo electrónico del responsable-->
+                <th>{{tarea.correoElec}}</th>
+                <!--Mostrar la prioridad de la tarea-->
+                <th>{{tarea.prioridad}}</th>
+            </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+
+    <!--Funcion controlador para guardar registros en archivo *.pickle-->
+    <form action="{{url_for('guardar')}}" method="post" class="card-body">
+        <div class="d-grid gap-2 col-6 mx-auto">
+            <button type="submit" class="btn btn-success">Guardar Registros</button>
+        </div>
+    </form>
+
+    <!--Funcion controlador para borrar registros-->
+    <form action="{{url_for('borrar')}}" method="post" class="card-body">
+        <div class="d-grid gap-2 col-6 mx-auto">
+            <button type="submit" class="btn btn-danger mb-2">Borrar registros</button>
+        </div>
+    </form>
+
+
+</body>
+
+<footer>
+    Elaborado por Capt. Castro Leopoldo<br>
+    km 24 1/2 vía Quevedo<br>
+    2022
+</footer>
+
+</html>

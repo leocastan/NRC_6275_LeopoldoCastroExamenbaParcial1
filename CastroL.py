@@ -1,7 +1,20 @@
 # Importar la biblioteca de flask y librerias necesarias
+# Repositorio Git https://github.com/leocastan/NRC_6275_LeopoldoCastroExamenbaParcial1.git
 from tkinter import messagebox
 from flask import Flask, redirect, render_template, request, url_for, flash
 import pickle
+import datetime
+import requests
+import os
+import argparse
+import re
+import json
+from dateutil.easter import easter
+from dateutil.relativedelta import relativedelta as rd, FR
+from holidays.constants import JAN, MAY, AUG, OCT, NOV, DEC
+from holidays.holiday_base import HolidayBase
+
+
 
 # Instanciar la aplicación
 # Nombre por defecto y ruta donde están los modelos
@@ -25,12 +38,15 @@ def enviar():
     # Funcion condicional para enviar los datos del formulario
     if request.method == 'POST':
 
-        descripcion = request.form['descripcion']
-        correoElec = request.form['correoElec']
-        prioridad = request.form['prioridad']
+        nroLlamada = request.form['nroLlamada']
+        placaVehiculo = request.form['placaVehiculo']
+        fecha = request.form['fecha']
+        hora = request.form['hora']
+        prediccion = request.form['prediccion']
+
 
         # Funcion condicional para no registrar en caso de datos vacios
-        if descripcion == '' or correoElec == '' or prioridad == '':
+        if nroLlamada == '' or placaVehiculo == '' or fecha == '' or hora == '' or prediccion == '':
             #Mensaje de alerta de campos faltantes
             messagebox.showwarning("¡Alerta!","Ingrese todos los campos")
             return redirect(url_for('home'))
@@ -40,7 +56,7 @@ def enviar():
             resultado = messagebox.askquestion("Registrar", "¿Está seguro que desea registrar los datos?")
             #Funcion condicional de confirmacion de registro
             if resultado == "yes":
-                listaLlamadas.append({'descripcion': descripcion, 'correoElec': correoElec, 'prioridad': prioridad })
+                listaLlamadas.append({'nroLlamada': nroLlamada, 'placaVehiculo': placaVehiculo, 'fecha': fecha, 'hora': hora, 'prediccion': prediccion })
                 return redirect(url_for('home'))
             else:
                 return redirect(url_for('home'))
@@ -51,7 +67,7 @@ def borrar():
     if request.method == 'POST':
         # Funcion condicional para mostrar alerta en caso de no existir
         if listaLlamadas == []:
-            messagebox.showwarning("¡Alerta!", "No existen tareas pendientes")
+            messagebox.showwarning("¡Alerta!", "No existen llamadas pendientes")
             return redirect(url_for('home'))
         else:
             # Mensaje de autorizacion de borrado
@@ -72,7 +88,7 @@ def guardar():
         # Funcion condicional para mostrar alerta en caso de no existir
         if listaLlamadas == []:
             messagebox.showwarning(
-                "¡Alerta!", "No existen tareas para almacenar")
+                "¡Alerta!", "No existen llamdas para almacenar")
             return redirect(url_for('home'))
         else:
             # Mensaje de autorizacion de guardado
@@ -81,9 +97,9 @@ def guardar():
             # Funcion condicional de confirmacion de guardado
             if resultado == "yes":
                 # Funcion de creacion y sobreescritura de archivo *.pickle
-                with open('Tareas.pickle', 'wb') as f:
-                    tareas = {'tareas': listaLlamadas}
-                    pickle.dump(tareas, f)
+                with open('llamadas.pickle', 'wb') as f:
+                    llamadas = {'llamadas': listaLlamadas}
+                    pickle.dump(llamadas, f)
                 messagebox.showinfo("Info", "Los datos han sido guardados")
                 return redirect(url_for('home'))
             else:

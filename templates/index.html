@@ -23,8 +23,6 @@
             font-size: 13px;
             color: white;
         }
-
-
     </style>
 
 
@@ -36,25 +34,25 @@
     <!--Formulario para el ingreso de nuevas tareas tomado de Bootstrap-->
     <form method="post" action="{{url_for('enviar')}}">
         <div class="form-group">
-            <label>Tarea</label>
-            <input type="text" class="form-control" placeholder="Ingrese la descripción de la tarea" name="descripcion">
+            <label>Nro. de Llamada</label>
+            <input type="text" class="form-control" placeholder="Ingrese el numero de llamada" name="nroLlamada">
         </div>
         <div class="form-group">
-            <label>Correo electrónico</label>
-            <input type="email" class="form-control"
-                placeholder="Ingrese el correo electrónico del responsable de la tarea" name="correoElec"
-                aria-describedby="emailHelp">
+            <label>Placa Vehículo</label>
+            <input type="text" class="form-control" placeholder="Ingrese la placa del vehiculo" name="placaVehiculo">
         </div>
         <div class="form-group">
-            <label>Prioridad</label>
-            <select class="form-select" size="1" aria-label="size 3 name select example" name ="prioridad">
-                <option value=""></option>
-                <option value="Baja">Baja</option>
-                <option value="Media">Media</option>
-                <option value="Alta">Alta</option>
-            </select>
-
-        </div> 
+            <label>Fecha</label>
+            <input type="text" class="form-control" placeholder="Ingrese la fecha" name="fecha">
+        </div>
+        <div class="form-group">
+            <label>Hora</label>
+            <input type="text" class="form-control" placeholder="Ingrese la hora" name="hora">
+        </div>
+        <div class="form-group">
+            <label>Prediccion</label>
+            <input type="text" class="form-control" placeholder="Prediccion" name="prediccion">
+        </div>
         <br>
         <div class="d-grid gap-2 col-6 mx-auto">
             <input type="submit" value="Registrar" class="btn btn-primary">
@@ -62,14 +60,15 @@
     </form><br>
 
     <h1>Listado de Llamadas</h1>
-
     <!--Controlador 1.1 Tabla para mostrar las tareas-->
     <table class="table table-dark table-striped">
         <thead>
             <tr>
-                <th scope="col">Descripción de la tarea</th>
-                <th scope="col">Correo electrónico</th>
-                <th scope="col">Prioridad</th>
+                <th scope="col">Nro. Llamada</th>
+                <th scope="col">Placa Vehiculo</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Hora</th>
+                <th scope="col">Prediccion</th>
             </tr>
 
         </thead>
@@ -77,15 +76,19 @@
         <tbody>
 
             <tr>
-                {% for tarea in listaTareas %}
-                <!--Mostrar la descripción de la tarea-->
-                <th>{{tarea.descripcion}}
+                {% for tarea in listaLlamadas %}
+                <!--Mostrar el numero de llamada-->
+                <th>{{tarea.nroLlamada}}
                     <button type="submit" class="btn btn-outline-warning">Borrar Registro</button>
                 </th>
-                <!--Mostrar correo electrónico del responsable-->
-                <th>{{tarea.correoElec}}</th>
-                <!--Mostrar la prioridad de la tarea-->
-                <th>{{tarea.prioridad}}</th>
+                <!--Mostrar la placa del vehiculo-->
+                <th>{{tarea.placaVehiculo}}</th>
+                <!--Mostrar la fecha-->
+                <th>{{tarea.fecha}}</th>
+                <!--Mostrar hora-->
+                <th>{{tarea.hora}}</th>
+                <!--Mostrar prediccion-->
+                <th>{{tarea.prediccion}}</th>
             </tr>
             {% endfor %}
         </tbody>
@@ -108,11 +111,4 @@
 
 
 </body>
-
-<footer>
-    Elaborado por Capt. Castro Leopoldo<br>
-    km 24 1/2 vía Quevedo<br>
-    2022
-</footer>
-
 </html>
